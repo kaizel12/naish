@@ -3,15 +3,15 @@ $(document).ready(function() {
     $('#tiktok-form').submit(function(event) {
         event.preventDefault();
         var url = $('#tiktok-url').val();
-        var apiUrl = `https://api.tiktok.com/download?url=${encodeURIComponent(url)}`;
+        var apiUrl = `https://apikeykaizel.vercel.app/api/tiktok?url=${encodeURIComponent(url)}`;
 
         $.get(apiUrl, function(data) {
-            var videoUrl = data.video.url;
+            var videoUrl = data.result.video;
             if (videoUrl) {
                 var link = document.createElement('a');
                 link.href = videoUrl;
                 link.download = 'video.mp4'; // Nama file yang akan diunduh
-                $('#tiktok-link').attr('href', videoUrl).show();
+                link.click(); // Automatis download
             } else {
                 alert('Video TikTok tidak tersedia.');
             }
@@ -24,15 +24,15 @@ $(document).ready(function() {
     $('#instagram-form').submit(function(event) {
         event.preventDefault();
         var url = $('#instagram-url').val();
-        var apiUrl = `https://api.instagram.com/download?url=${encodeURIComponent(url)}`;
+        var apiUrl = `https://api.shannmoderz.xyz/downloader/instagram?url=${encodeURIComponent(url)}`;
 
         $.get(apiUrl, function(data) {
-            var videoUrl = data.video.url;
+            var videoUrl = data.result.videoUrl;
             if (videoUrl) {
                 var link = document.createElement('a');
                 link.href = videoUrl;
                 link.download = 'video.mp4'; // Nama file yang akan diunduh
-                $('#instagram-link').attr('href', videoUrl).show();
+                link.click(); // Automatis download
             } else {
                 alert('Video Instagram tidak tersedia.');
             }
@@ -48,12 +48,12 @@ $(document).ready(function() {
         var apiUrl = `https://skizo.tech/api/facebook?apikey=avatar&url=${encodeURIComponent(url)}`;
 
         $.get(apiUrl, function(data) {
-            var videoUrl = data.find(video => video.quality === 'HD').url;
+            var videoUrl = data.find(video => video.quality === 'HD')?.url;
             if (videoUrl) {
                 var link = document.createElement('a');
                 link.href = videoUrl;
                 link.download = 'video.mp4'; // Nama file yang akan diunduh
-                $('#facebook-link').attr('href', videoUrl).show();
+                link.click(); // Automatis download
             } else {
                 alert('Video Facebook HD tidak tersedia.');
             }
@@ -69,12 +69,12 @@ $(document).ready(function() {
         var apiUrl = `https://skizo.tech/api/y2mate?apikey=avatar&url=${encodeURIComponent(url)}`;
 
         $.get(apiUrl, function(data) {
-            var videoUrl = data.formats.video.mp4.find(format => format.quality === '480p').convert;
+            var videoUrl = data.formats.video.mp4.find(format => format.quality === '480p')?.convert;
             if (videoUrl) {
                 var link = document.createElement('a');
                 link.href = videoUrl;
                 link.download = 'video.mp4'; // Nama file yang akan diunduh
-                $('#youtube-link').attr('href', videoUrl).show();
+                link.click(); // Automatis download
             } else {
                 alert('Video YouTube dengan kualitas 480p tidak tersedia.');
             }
