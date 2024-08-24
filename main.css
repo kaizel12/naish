@@ -42,15 +42,6 @@ body {
     color: #fff;
     cursor: pointer;
     z-index: 20;
-    background-color: rgba(0, 0, 0, 0.5); /* Background to improve visibility */
-    border-radius: 50%; /* Make it round */
-    padding: 10px; /* Space around the icon */
-    transition: background-color 0.3s, transform 0.3s;
-}
-
-.tribal-icon:hover {
-    background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
-    transform: scale(1.1); /* Slightly enlarge the icon */
 }
 
 .overlay {
