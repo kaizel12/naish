@@ -5,9 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Downloader</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="./main.css">
 </head>
 
 <body>
@@ -15,9 +14,8 @@
         WEB DOWNLOADER FREE
     </div>
     <div class="footer">
-        license kaizeljsh 2024
+        License Kaizeljsh 2024
     </div>
-    <!-- Tribal Icon -->
     <i class="fas fa-asterisk tribal-icon"></i>
 
     <!-- Full Screen Overlay -->
@@ -27,68 +25,69 @@
             <h2>About This Web App</h2>
             <p>This web app allows you to download videos from TikTok, Instagram, Facebook, and YouTube with ease.</p>
             <p>Click on the desired platform, enter the URL, and start downloading!</p>
-            <p>This is a free downloader tool for various platforms. Enjoy your stay and feel free to donate if you find it useful.</p>
-            <a href="https://donasi.xcom" class="donate-button">Donate</a>
         </div>
     </div>
 
     <div class="scroll-container">
         <div class="container">
-            <h1>Download Videos</h1>
-
             <div class="section">
-                <h2>Download from TikTok</h2>
                 <div class="section-content">
-                    <div class="input-container">
-                        <input type="text" id="tiktok-url" placeholder="Enter TikTok URL">
-                        <button id="tiktok-download">Download TikTok Video</button>
-                        <div class="loading-spinner" id="tiktok-loading"></div>
-                        <a id="tiktok-link" class="hidden-link" href="#">Download Video</a>
-                        <a id="tiktok-audio-link" class="hidden-link" href="#">Download Audio</a>
-                    </div>
+                    <h1><i class="fab fa-tiktok icon"></i>TikTok Downloader</h1>
+                    <form id="tiktok-form">
+                        <div class="input-container">
+                            <input type="url" id="tiktok-url" placeholder="Enter TikTok URL" required>
+                            <button type="submit" id="download-mp4">Download MP4</button>
+                            <button type="button" id="download-audio">Download Audio</button>
+                            <div id="tiktok-loading" class="loading-spinner"></div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
             <div class="section">
-                <h2>Download from Instagram</h2>
                 <div class="section-content">
-                    <div class="input-container">
-                        <input type="text" id="instagram-url" placeholder="Enter Instagram URL">
-                        <button id="instagram-download">Download Instagram Post</button>
-                        <div class="loading-spinner" id="instagram-loading"></div>
-                        <a id="instagram-link" class="hidden-link" href="#">Download Link</a>
-                    </div>
+                    <h1><i class="fab fa-instagram icon"></i>Instagram Downloader</h1>
+                    <form id="instagram-form">
+                        <div class="input-container">
+                            <input type="url" id="instagram-url" placeholder="Enter Instagram URL" required>
+                            <button type="submit">Download</button>
+                            <div id="instagram-loading" class="loading-spinner"></div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
             <div class="section">
-                <h2>Download from Facebook</h2>
                 <div class="section-content">
-                    <div class="input-container">
-                        <input type="text" id="facebook-url" placeholder="Enter Facebook URL">
-                        <button id="facebook-download">Download Facebook Video</button>
-                        <div class="loading-spinner" id="facebook-loading"></div>
-                        <a id="facebook-link" class="hidden-link" href="#">Download Link</a>
-                    </div>
+                    <h1><i class="fab fa-facebook icon"></i>Facebook Downloader</h1>
+                    <form id="facebook-form">
+                        <div class="input-container">
+                            <input type="url" id="facebook-url" placeholder="Enter Facebook URL" required>
+                            <button type="submit">Download</button>
+                            <div id="facebook-loading" class="loading-spinner"></div>
+                        </div>
+                    </form>
                 </div>
             </div>
 
             <div class="section">
-                <h2>Download from YouTube</h2>
                 <div class="section-content">
-                    <div class="input-container">
-                        <input type="text" id="youtube-url" placeholder="Enter YouTube URL">
-                        <button id="youtube-download">Download YouTube Video</button>
-                        <div class="loading-spinner" id="youtube-loading"></div>
-                        <a id="youtube-link" class="hidden-link" href="#">Download Video</a>
-                        <a id="youtube-audio-link" class="hidden-link" href="#">Download Audio</a>
-                    </div>
+                    <h1><i class="fab fa-youtube icon"></i>YouTube Downloader</h1>
+                    <form id="youtube-form">
+                        <div class="input-container">
+                            <input type="url" id="youtube-url" placeholder="Enter YouTube URL" required>
+                            <button type="submit" id="download-youtube-mp4">Download MP4</button>
+                            <button type="button" id="download-youtube-audio">Download Audio</button>
+                            <div id="youtube-loading" class="loading-spinner"></div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <script src="./dw.js"></script>
+    <a id="hidden-link" class="hidden-link" download></a>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
