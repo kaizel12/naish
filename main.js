@@ -7,7 +7,7 @@ $(document).ready(function () {
             var isAudio = buttonId === '#download-audio' || buttonId === '#download-youtube-audio'; // Check if the button clicked is for audio
 
             button.prop('disabled', true); // Disable button
-            $(loadingId).addClass('loading-active'); // Show loading spinner
+            $(loadingId).show(); // Show loading spinner
 
             $.get(apiUrl + encodeURIComponent(url), function (data) {
                 var downloadUrl;
@@ -45,7 +45,7 @@ $(document).ready(function () {
                 alert('Terjadi kesalahan, coba lagi nanti.');
             }).always(function () {
                 button.prop('disabled', false); // Re-enable button
-                $(loadingId).removeClass('loading-active'); // Hide loading spinner
+                $(loadingId).hide(); // Hide loading spinner
             });
         });
     }
@@ -57,7 +57,7 @@ $(document).ready(function () {
         var loadingId = '#tiktok-loading';
 
         button.prop('disabled', true); // Disable button
-        $(loadingId).addClass('loading-active'); // Show loading spinner
+        $(loadingId).show(); // Show loading spinner
 
         $.get('https://widipe.com/download/ttdl?url=' + encodeURIComponent(url), function (data) {
             var downloadUrl = data.result.audio[0]; // Assuming the response contains audio URLs
@@ -74,7 +74,7 @@ $(document).ready(function () {
             alert('Terjadi kesalahan, coba lagi nanti.');
         }).always(function () {
             button.prop('disabled', false); // Re-enable button
-            $(loadingId).removeClass('loading-active'); // Hide loading spinner
+            $(loadingId).hide(); // Hide loading spinner
         });
     });
 
@@ -87,7 +87,7 @@ $(document).ready(function () {
         var loadingId = '#youtube-loading';
 
         button.prop('disabled', true); // Disable button
-        $(loadingId).addClass('loading-active'); // Show loading spinner
+        $(loadingId).show(); // Show loading spinner
 
         $.get('https://skizo.tech/api/y2mate?apikey=avatar&url=' + encodeURIComponent(url), function (data) {
             var downloadUrl = data.formats.audio[0].convert; // Assuming the response contains audio URLs
@@ -104,7 +104,7 @@ $(document).ready(function () {
             alert('Terjadi kesalahan, coba lagi nanti.');
         }).always(function () {
             button.prop('disabled', false); // Re-enable button
-            $(loadingId).removeClass('loading-active'); // Hide loading spinner
+            $(loadingId).hide(); // Hide loading spinner
         });
     });
 
