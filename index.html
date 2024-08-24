@@ -16,12 +16,12 @@
     <div class="footer">
         License Kaizeljsh 2024
     </div>
-    <i class="fas fa-asterisk tribal-icon"></i>
+    <i class="fas fa-asterisk tribal-icon" onclick="showOverlay()"></i>
 
     <!-- Full Screen Overlay -->
-    <div class="overlay">
+    <div class="overlay" id="info-overlay">
         <div class="overlay-content">
-            <i class="fas fa-times close-btn"></i>
+            <i class="fas fa-times close-btn" onclick="hideOverlay()"></i>
             <h2>About This Web App</h2>
             <p>This web app allows you to download videos from TikTok, Instagram, Facebook, and YouTube with ease.</p>
             <p>Click on the desired platform, enter the URL, and start downloading!</p>
@@ -76,8 +76,7 @@
                     <form id="youtube-form">
                         <div class="input-container">
                             <input type="url" id="youtube-url" placeholder="Enter YouTube URL" required>
-                            <button type="submit" id="download-youtube-mp4">Download MP4</button>
-                            <button type="button" id="download-youtube-audio">Download Audio</button>
+                            <button type="submit">Download</button>
                             <div id="youtube-loading" class="loading-spinner"></div>
                         </div>
                     </form>
@@ -85,9 +84,16 @@
             </div>
         </div>
     </div>
-    <a id="hidden-link" class="hidden-link" download></a>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="main.js"></script>
+
+    <script>
+        function showOverlay() {
+            document.getElementById('info-overlay').style.display = 'flex';
+        }
+
+        function hideOverlay() {
+            document.getElementById('info-overlay').style.display = 'none';
+        }
+    </script>
 </body>
 
 </html>
