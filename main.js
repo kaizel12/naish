@@ -107,5 +107,4 @@ $(document).ready(function () {
             $(loadingId).hide(); // Hide loading spinner
         });
     });
-
 });
