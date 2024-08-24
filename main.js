@@ -21,7 +21,7 @@ $(document).ready(function () {
                         downloadUrl = data.result.video[0]; // MP4 URL
                     }
                 } else if (formId === '#facebook-form') {
-                    downloadUrl = data.result[0].downloadLink; // Adjusted for Facebook response structure
+                    downloadUrl = data.result.url.urls[0].hd; // Using HD link for Facebook
                 } else if (formId === '#youtube-form') {
                     if (isAudio) {
                         downloadUrl = data.formats.audio.mp3.find(item => item.quality === 320).convert; // Using the provided mp3 link for the highest quality
@@ -76,7 +76,7 @@ $(document).ready(function () {
     });
 
     handleFormSubmit('#instagram-form', 'https://widipe.com/download/igdl?url=', '#instagram-loading', 'button');
-    handleFormSubmit('#facebook-form', 'https://api.shannmoderz.xyz/downloader/facebook?url=', '#facebook-loading', 'button');
+    handleFormSubmit('#facebook-form', 'https://widipe.com/download/fbdown?url=', '#facebook-loading', 'button');
     handleFormSubmit('#youtube-form', 'https://skizo.tech/api/y2mate?apikey=avatar&url=', '#youtube-loading', '#download-youtube-mp4');
     
     $('#download-youtube-audio').click(function () {
