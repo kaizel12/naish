@@ -4,7 +4,7 @@ $(document).ready(function () {
             event.preventDefault();
             var button = $(this).find(buttonId);
             var url = $(this).find('input').val();
-            var isAudio = buttonId === '#download-audio' || buttonId === '#download-youtube-audio'; // Check if the button clicked is for audio
+            var isAudio = buttonId === '#download-audio' || buttonId === '#download-youtube-audio';
 
             button.prop('disabled', true); // Disable button
             $(loadingId).addClass('loading-active'); // Show loading spinner
@@ -24,12 +24,9 @@ $(document).ready(function () {
                     downloadUrl = data.result[0].downloadLink; // Adjusted for Facebook response structure
                 } else if (formId === '#youtube-form') {
                     if (isAudio) {
-                        downloadUrl = data.formats.audio[0].convert; // Using the first audio format
+                        downloadUrl = data.result.mp3; // Using the provided mp3 link
                     } else {
-                        // For YouTube, use the first available MP4 format
-                        if (data.formats && data.formats.video && data.formats.video.mp4 && data.formats.video.mp4.length > 0) {
-                            downloadUrl = data.formats.video.mp4[0].convert; // Using the first MP4 format
-                        }
+                        downloadUrl = data.result.mp4; // Using the provided mp4 link
                     }
                 }
 
@@ -80,7 +77,8 @@ $(document).ready(function () {
 
     handleFormSubmit('#instagram-form', 'https://widipe.com/download/igdl?url=', '#instagram-loading', 'button');
     handleFormSubmit('#facebook-form', 'https://api.shannmoderz.xyz/downloader/facebook?url=', '#facebook-loading', 'button');
-    handleFormSubmit('#youtube-form', 'https://skizo.tech/api/y2mate?apikey=avatar&url=', '#youtube-loading', '#download-youtube-mp4');
+    handleFormSubmit('#youtube-form', 'https://widipe.com/download/ytdl?url=', '#youtube-loading', '#download-youtube-mp4');
+    
     $('#download-youtube-audio').click(function () {
         var url = $('#youtube-url').val();
         var button = $(this);
@@ -89,8 +87,8 @@ $(document).ready(function () {
         button.prop('disabled', true); // Disable button
         $(loadingId).addClass('loading-active'); // Show loading spinner
 
-        $.get('https://skizo.tech/api/y2mate?apikey=avatar&url=' + encodeURIComponent(url), function (data) {
-            var downloadUrl = data.formats.audio[0].convert; // Assuming the response contains audio URLs
+        $.get('https://widipe.com/download/ytdl?url=' + encodeURIComponent(url), function (data) {
+            var downloadUrl = data.result.mp3; // Using the provided mp3 link
 
             if (downloadUrl) {
                 var link = document.getElementById('hidden-link');
@@ -107,5 +105,4 @@ $(document).ready(function () {
             $(loadingId).removeClass('loading-active'); // Hide loading spinner
         });
     });
-
-});  //tambahkan loading nya
+});
