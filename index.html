@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Downloader</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            overflow: hidden;
+            height: 100vh;
+        }
+        .header {
+            width: 100%;
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 15px 0;
+            font-size: 1.5em;
+            font-weight: 700;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+        .scroll-container {
+            margin-top: 60px; /* Adjust based on header height */
+            overflow-y: auto;
+            height: calc(100vh - 60px); /* Adjust based on header height */
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .container {
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        h1 {
+            margin: 0 0 20px 0;
+            text-align: center;
+            font-size: 1.8em;
+            color: #333;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+        }
+        .section {
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            background: #f7f9fc;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+        .section:hover {
+            background-color: #e2e6ea;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+        }
+        .section-content {
+            position: relative;
+            z-index: 1;
+        }
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .input-container input {
+            padding: 14px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            width: 100%;
+            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+            box-sizing: border-box;
+        }
+        .input-container input:focus {
+            border-color: #ff7e5f;
+            box-shadow: 0 0 8px rgba(255, 126, 95, 0.3);
+            outline: none;
+            transform: scale(1.02);
+        }
+        .input-container button, .download-link {
+            padding: 14px 22px;
+            font-size: 16px;
+            color: #ffffff;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+            text-align: center;
+            text-transform: uppercase;
+            display: inline-block;
+            text-decoration: none;
+            line-height: 1.5;
+        }
+        .input-container button {
+            background: linear-gradient(90deg, #ff7e5f, #feb47b);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .input-container button:hover {
+            background: linear-gradient(90deg, #feb47b, #ff7e5f);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .input-container button:active {
+            transform: translateY(2px);
+        }
+        .download-link {
+            background: linear-gradient(90deg, #28a745, #1e7e34);
+            display: none;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .download-link:hover {
+            background: linear-gradient(90deg, #1e7e34, #28a745);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+        .download-link:active {
+            transform: translateY(2px);
+        }
+        .icon {
+            font-size: 24px;
+            margin-right: 10px;
+            color: #333;
+            transition: color 0.3s;
+        }
+        .input-container input:focus ~ .icon {
+            color: #ff7e5f;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        WEBSITE DOWNLOADER FREE
+    </div>
+    <div class="scroll-container">
+        <div class="container">
+            <div class="section">
+                <div class="section-content">
+                    <h1><i class="fab fa-tiktok icon"></i>TikTok Downloader</h1>
+                    <form id="tiktok-form">
+                        <div class="input-container">
+                            <input type="url" id="tiktok-url" placeholder="Enter TikTok URL" required>
+                            <button type="submit">Download</button>
+                            <a id="tiktok-link" class="download-link" download>TikTok</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-content">
+                    <h1><i class="fab fa-instagram icon"></i>Instagram Downloader</h1>
+                    <form id="instagram-form">
+                        <div class="input-container">
+                            <input type="url" id="instagram-url" placeholder="Enter Instagram URL" required>
+                            <button type="submit">Download</button>
+                            <a id="instagram-link" class="download-link" download>Instagram</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-content">
+                    <h1><i class="fab fa-facebook icon"></i>Facebook Downloader</h1>
+                    <form id="facebook-form">
+                        <div class="input-container">
+                            <input type="url" id="facebook-url" placeholder="Enter Facebook URL" required>
+                            <button type="submit">Download</button>
+                            <a id="facebook-link" class="download-link" download>Facebook</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-content">
+                    <h1><i class="fab fa-youtube icon"></i>YouTube Downloader</h1>
+                    <form id="youtube-form">
+                        <div class="input-container">
+                            <input type="url" id="youtube-url" placeholder="Enter YouTube URL" required>
+                            <button type="submit">Download</button>
+                            <a id="youtube-link" class="download-link" download>YouTube</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
