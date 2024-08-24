@@ -10,8 +10,8 @@ $(document).ready(function() {
             if (videoUrl) {
                 var link = document.createElement('a');
                 link.href = videoUrl;
-                link.download = 'video.mp4'; // Nama file yang akan diunduh
-                link.click(); // Automatis download
+                link.download = 'video.mp4';
+                link.click(); // Otomatis download
             } else {
                 alert('Video TikTok tidak tersedia.');
             }
@@ -31,8 +31,8 @@ $(document).ready(function() {
             if (videoUrl) {
                 var link = document.createElement('a');
                 link.href = videoUrl;
-                link.download = 'video.mp4'; // Nama file yang akan diunduh
-                link.click(); // Automatis download
+                link.download = 'video.mp4';
+                link.click(); // Otomatis download
             } else {
                 alert('Video Instagram tidak tersedia.');
             }
@@ -52,8 +52,8 @@ $(document).ready(function() {
             if (videoUrl) {
                 var link = document.createElement('a');
                 link.href = videoUrl;
-                link.download = 'video.mp4'; // Nama file yang akan diunduh
-                link.click(); // Automatis download
+                link.download = 'video.mp4';
+                link.click(); // Otomatis download
             } else {
                 alert('Video Facebook HD tidak tersedia.');
             }
@@ -73,8 +73,8 @@ $(document).ready(function() {
             if (videoUrl) {
                 var link = document.createElement('a');
                 link.href = videoUrl;
-                link.download = 'video.mp4'; // Nama file yang akan diunduh
-                link.click(); // Automatis download
+                link.download = 'video.mp4';
+                link.click(); // Otomatis download
             } else {
                 alert('Video YouTube dengan kualitas 480p tidak tersedia.');
             }
