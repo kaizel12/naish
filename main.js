@@ -24,9 +24,9 @@ $(document).ready(function () {
                     downloadUrl = data.result[0].downloadLink; // Adjusted for Facebook response structure
                 } else if (formId === '#youtube-form') {
                     if (isAudio) {
-                        downloadUrl = data.result.mp3; // Using the provided mp3 link
+                        downloadUrl = data.formats.audio.mp3.find(item => item.quality === 320).convert; // Using the provided mp3 link for the highest quality
                     } else {
-                        downloadUrl = data.result.mp4; // Using the provided mp4 link
+                        downloadUrl = data.formats.video.mp4.find(item => item.quality === "1080p60").convert; // Using the provided mp4 link for the highest quality
                     }
                 }
 
@@ -77,7 +77,7 @@ $(document).ready(function () {
 
     handleFormSubmit('#instagram-form', 'https://widipe.com/download/igdl?url=', '#instagram-loading', 'button');
     handleFormSubmit('#facebook-form', 'https://api.shannmoderz.xyz/downloader/facebook?url=', '#facebook-loading', 'button');
-    handleFormSubmit('#youtube-form', 'https://widipe.com/download/ytdl?url=', '#youtube-loading', '#download-youtube-mp4');
+    handleFormSubmit('#youtube-form', 'https://skizo.tech/api/y2mate?apikey=avatar&url=', '#youtube-loading', '#download-youtube-mp4');
     
     $('#download-youtube-audio').click(function () {
         var url = $('#youtube-url').val();
@@ -87,8 +87,8 @@ $(document).ready(function () {
         button.prop('disabled', true); // Disable button
         $(loadingId).addClass('loading-active'); // Show loading spinner
 
-        $.get('https://widipe.com/download/ytdl?url=' + encodeURIComponent(url), function (data) {
-            var downloadUrl = data.result.mp3; // Using the provided mp3 link
+        $.get('https://skizo.tech/api/y2mate?apikey=avatar&url=' + encodeURIComponent(url), function (data) {
+            var downloadUrl = data.formats.audio.mp3.find(item => item.quality === 320).convert; // Using the provided mp3 link for the highest quality
 
             if (downloadUrl) {
                 var link = document.getElementById('hidden-link');
