@@ -1,84 +1,111 @@
-$(document).ready(function() {
-    // Toggle overlay visibility
-    $('.tribal-icon').click(function() {
-        $('.overlay').toggle();
-    });
+$(document).ready(function () {
+    function handleFormSubmit(formId, apiUrl, loadingId, buttonId) {
+        $(formId).submit(function (event) {
+            event.preventDefault();
+            var button = $(this).find(buttonId);
+            var url = $(this).find('input').val();
+            var isAudio = buttonId === '#download-audio' || buttonId === '#download-youtube-audio'; // Check if the button clicked is for audio
 
-    $('.close-btn').click(function() {
-        $('.overlay').hide();
-    });
+            button.prop('disabled', true); // Disable button
+            $(loadingId).addClass('loading-active'); // Show loading spinner
 
-    // Handle form submissions
-    $('#tiktok-form').submit(function(event) {
-        event.preventDefault();
-        var url = $('#tiktok-url').val();
-        if ($('#download-mp4').is(':visible')) {
-            handleDownload(url, 'https://widipe.com/download/ttdl?url=', '#tiktok-loading', 'video');
-        } else if ($('#download-audio').is(':visible')) {
-            handleDownload(url, 'https://widipe.com/download/ttdl?url=', '#tiktok-loading', 'audio');
-        }
-    });
+            $.get(apiUrl + encodeURIComponent(url), function (data) {
+                var downloadUrl;
 
-    $('#instagram-form').submit(function(event) {
-        event.preventDefault();
-        handleDownload($('#instagram-url').val(), 'https://widipe.com/download/igdl?url=', '#instagram-loading', 'video');
-    });
-
-    $('#facebook-form').submit(function(event) {
-        event.preventDefault();
-        handleDownload($('#facebook-url').val(), 'https://api.shannmoderz.xyz/downloader/facebook?url=', '#facebook-loading', 'video');
-    });
-
-    $('#youtube-form').submit(function(event) {
-        event.preventDefault();
-        var url = $('#youtube-url').val();
-        if ($('#download-youtube-mp4').is(':visible')) {
-            handleDownload(url, 'https://skizo.tech/api/y2mate?apikey=avatar&url=', '#youtube-loading', 'video');
-        } else if ($('#download-youtube-audio').is(':visible')) {
-            handleDownload(url, 'https://skizo.tech/api/y2mate?apikey=avatar&url=', '#youtube-loading', 'audio');
-        }
-    });
-
-    // Generic download handling function
-    function handleDownload(url, apiUrl, loaderSelector, type) {
-        $(loaderSelector).show();
-        fetch(apiUrl + encodeURIComponent(url))
-            .then(response => response.json())
-            .then(data => {
-                $(loaderSelector).hide();
-                var downloadUrl = '';
-                if (type === 'video') {
-                    downloadUrl = getVideoUrl(data);
-                } else if (type === 'audio') {
-                    downloadUrl = getAudioUrl(data);
+                if (formId === '#instagram-form') {
+                    downloadUrl = data.result[0].url;
+                } else if (formId === '#tiktok-form') {
+                    if (isAudio) {
+                        downloadUrl = data.result.audio[0]; // Assuming the response contains audio URLs
+                    } else {
+                        downloadUrl = data.result.video[0]; // MP4 URL
+                    }
+                } else if (formId === '#facebook-form') {
+                    downloadUrl = data.result[0].downloadLink; // Adjusted for Facebook response structure
+                } else if (formId === '#youtube-form') {
+                    if (isAudio) {
+                        downloadUrl = data.formats.audio[0].convert; // Using the first audio format
+                    } else {
+                        // For YouTube, use the first available MP4 format
+                        if (data.formats && data.formats.video && data.formats.video.mp4 && data.formats.video.mp4.length > 0) {
+                            downloadUrl = data.formats.video.mp4[0].convert; // Using the first MP4 format
+                        }
+                    }
                 }
 
                 if (downloadUrl) {
-                    $('#hidden-link').attr('href', downloadUrl).attr('download', downloadUrl.split('/').pop()).get(0).click();
+                    var link = document.getElementById('hidden-link');
+                    link.href = downloadUrl;
+                    link.download = downloadUrl.split('/').pop();
+                    link.click();
                 } else {
                     alert('Terjadi kesalahan, coba lagi nanti.');
                 }
-            })
-            .catch(error => {
-                $(loaderSelector).hide();
-                console.error('Error:', error);
+            }).fail(function () {
                 alert('Terjadi kesalahan, coba lagi nanti.');
+            }).always(function () {
+                button.prop('disabled', false); // Re-enable button
+                $(loadingId).removeClass('loading-active'); // Hide loading spinner
             });
+        });
     }
 
-    function getVideoUrl(data) {
-        // Update with actual data parsing logic
-        if (data.result && data.result.video) {
-            return data.result.video[0];
-        }
-        return '';
-    }
+    handleFormSubmit('#tiktok-form', 'https://widipe.com/download/ttdl?url=', '#tiktok-loading', '#download-mp4');
+    $('#download-audio').click(function () {
+        var url = $('#tiktok-url').val();
+        var button = $(this);
+        var loadingId = '#tiktok-loading';
 
-    function getAudioUrl(data) {
-        // Update with actual data parsing logic
-        if (data.result && data.result.audio) {
-            return data.result.audio[0];
-        }
-        return '';
-    }
+        button.prop('disabled', true); // Disable button
+        $(loadingId).addClass('loading-active'); // Show loading spinner
+
+        $.get('https://widipe.com/download/ttdl?url=' + encodeURIComponent(url), function (data) {
+            var downloadUrl = data.result.audio[0]; // Assuming the response contains audio URLs
+
+            if (downloadUrl) {
+                var link = document.getElementById('hidden-link');
+                link.href = downloadUrl;
+                link.download = downloadUrl.split('/').pop();
+                link.click();
+            } else {
+                alert('Terjadi kesalahan, coba lagi nanti.');
+            }
+        }).fail(function () {
+            alert('Terjadi kesalahan, coba lagi nanti.');
+        }).always(function () {
+            button.prop('disabled', false); // Re-enable button
+            $(loadingId).removeClass('loading-active'); // Hide loading spinner
+        });
+    });
+
+    handleFormSubmit('#instagram-form', 'https://widipe.com/download/igdl?url=', '#instagram-loading', 'button');
+    handleFormSubmit('#facebook-form', 'https://api.shannmoderz.xyz/downloader/facebook?url=', '#facebook-loading', 'button');
+    handleFormSubmit('#youtube-form', 'https://skizo.tech/api/y2mate?apikey=avatar&url=', '#youtube-loading', '#download-youtube-mp4');
+    $('#download-youtube-audio').click(function () {
+        var url = $('#youtube-url').val();
+        var button = $(this);
+        var loadingId = '#youtube-loading';
+
+        button.prop('disabled', true); // Disable button
+        $(loadingId).addClass('loading-active'); // Show loading spinner
+
+        $.get('https://skizo.tech/api/y2mate?apikey=avatar&url=' + encodeURIComponent(url), function (data) {
+            var downloadUrl = data.formats.audio[0].convert; // Assuming the response contains audio URLs
+
+            if (downloadUrl) {
+                var link = document.getElementById('hidden-link');
+                link.href = downloadUrl;
+                link.download = downloadUrl.split('/').pop();
+                link.click();
+            } else {
+                alert('Terjadi kesalahan, coba lagi nanti.');
+            }
+        }).fail(function () {
+            alert('Terjadi kesalahan, coba lagi nanti.');
+        }).always(function () {
+            button.prop('disabled', false); // Re-enable button
+            $(loadingId).removeClass('loading-active'); // Hide loading spinner
+        });
+    });
+
 });
