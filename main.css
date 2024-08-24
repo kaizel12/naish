@@ -43,6 +43,12 @@ body {
     color: #fff;
     cursor: pointer;
     z-index: 20;
+    animation: rotate 5s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .overlay {
@@ -195,4 +201,23 @@ h1 {
     font-size: 24px;
     margin-right: 10px;
     vertical-align: middle;
+}
+
+.donate-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 24px;
+    font-size: 16px;
+    color: #fff;
+    background: #ff7e5f;
+    border-radius: 25px;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background-color 0.3s, transform 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.donate-btn:hover {
+    background: #feb47b;
+    transform: scale(1.05);
 }
